@@ -6,6 +6,8 @@ import {
   StatusBar
 } from 'react-native';
 
+import { ButtonIcon } from '../../components/ButtonIco';
+
 import IllustrationImg from '../../assets/illustration.png';
 import { styles } from './styles';
 
@@ -34,6 +36,7 @@ export function SignIn() {
           Crie grupos para jogar seus games{'\n'}
           favoritos com seus amigos
         </Text>
+        <ButtonIcon />
       </View>
     </View>
   );
