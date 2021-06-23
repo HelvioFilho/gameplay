@@ -1,9 +1,9 @@
-import React from "react";
-import { Image } from "react-native";
+import React from 'react';
+import { Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import { theme } from "../../global/styles/theme";
-import { styles } from "./styles";
+import { theme } from '../../global/styles/theme';
+import { styles } from './styles';
 
 type Props = {
   urlImage: string;
