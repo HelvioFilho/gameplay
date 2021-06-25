@@ -11,9 +11,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
+    fontFamily: theme.fonts.text500,
+    fontSize: 15,
     flex: 1,
     color: theme.colors.heading,
-    fontSize: 15,
     textAlign: 'center',
   },
   iconWrapper: {
