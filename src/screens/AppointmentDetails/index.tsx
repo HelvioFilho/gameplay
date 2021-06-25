@@ -32,6 +32,18 @@ export function AppointmentDetails() {
       username: 'Raul',
       avatar_url: 'https://github.com/RafaelGoulartB.png',
       status: 'ocupado',
+    },
+    {
+      id: '3',
+      username: 'Mario',
+      avatar_url: 'https://github.com/RafaelGoulartB.png',
+      status: 'online',
+    },
+    {
+      id: '4',
+      username: 'Suzano',
+      avatar_url: 'https://github.com/HelvioFilho.png',
+      status: 'ocupado',
     }
   ]
 
@@ -73,6 +85,7 @@ export function AppointmentDetails() {
           <Member data={item} />
         )}
         ItemSeparatorComponent={() => <ListDivider />}
+        contentContainerStyle={{ paddingBottom: 40 }}
         style={styles.members}
       />
       <View style={styles.footer}>
