@@ -12,20 +12,21 @@ import { Background } from '../Background';
 
 type Props = ModalProps & {
   children: ReactNode;
+  styleVision?: boolean;
   closeModal: () => void;
 }
 
-export function ModalView({ children, closeModal, ...rest }: Props) {
+export function ModalView({ children, styleVision, closeModal, ...rest }: Props) {
   return (
     <Modal
       transparent
-      animationType="slide"
+      animationType={styleVision ? "fade" : "slide"}
       statusBarTranslucent
       {...rest}
     >
       <TouchableWithoutFeedback onPress={closeModal}>
-        <View style={styles.overlay}>
-          <View style={styles.container}>
+        <View style={styleVision ? [styles.error, styles.overlay] : styles.overlay}>
+          <View style={styleVision ? styles.modalView : styles.container}>
             <Background>
               <View style={styles.bar} />
               {children}
@@ -33,6 +34,6 @@ export function ModalView({ children, closeModal, ...rest }: Props) {
           </View>
         </View>
       </TouchableWithoutFeedback>
-    </Modal>
+    </Modal >
   );
 }

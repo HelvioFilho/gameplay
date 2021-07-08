@@ -31,12 +31,14 @@ export function AppointmentCreate() {
   const [category, setCategory] = useState('');
   const [openGuildsModal, setOpenGuildsModal] = useState(false);
   const [guild, setGuild] = useState<GuildProps>({} as GuildProps);
+  const [openErrorModal, setOpenErrorModal] = useState(false);
 
   const [day, setDay] = useState('');
   const [month, setMonth] = useState('');
   const [hour, setHour] = useState('');
   const [minute, setMinute] = useState('');
   const [description, setDescription] = useState('');
+  const [textError, setTextError] = useState('');
 
   const navigation = useNavigation();
 
@@ -48,6 +50,14 @@ export function AppointmentCreate() {
     setOpenGuildsModal(false);
   }
 
+  function handleOpenError() {
+    setOpenErrorModal(true);
+  }
+
+  function handleCloseError() {
+    setOpenErrorModal(false);
+  }
+
   function handleGuildSelect(guildSelect: GuildProps) {
     setGuild(guildSelect);
     setOpenGuildsModal(false);
@@ -55,6 +65,38 @@ export function AppointmentCreate() {
 
   function handleCategorySelect(categoryId: string) {
     setCategory(categoryId);
+  }
+
+  function verifyDate() {
+    switch (isNaN(parseInt(month)) || parseInt(month)) {
+      case true:
+        parseInt(day) <= 31 ? '' : setDay('31');
+        break;
+      case 2:
+        parseInt(day) <= 29 ? '' : setDay('29');
+        break;
+      default:
+        parseInt(day) <= 31 ? '' : setDay('31');
+        parseInt(month) <= 12 ? '' : setMonth('12');
+        break;
+    }
+    if (day.length === 1) {
+      setDay(`0${day}`);
+    }
+    if (month.length === 1) {
+      setMonth(`0${month}`);
+    }
+  }
+
+  function verifyTime() {
+    parseInt(hour) > 23 ? setHour('23') : '';
+    parseInt(minute) > 59 ? setMinute('00') : '';
+    if (hour.length === 1) {
+      setHour(`0${hour}`);
+    }
+    if (minute.length === 1) {
+      setMinute(`0${minute}`);
+    }
   }
 
   async function handleSave() {
@@ -76,6 +118,27 @@ export function AppointmentCreate() {
     navigation.navigate('Home');
   }
 
+  function checkForm() {
+    if (category === '') {
+      setTextError('Selecione uma categoria!');
+      handleOpenError();
+    } else if (guild.id === undefined) {
+      setTextError('Selecione um servidor!');
+      handleOpenError();
+    } else if (day === '' || month === '') {
+      setTextError('Defina um dia e mês!');
+      handleOpenError();
+    } else if (hour === '' || minute === '') {
+      setTextError('Defina um horário válido!');
+      handleOpenError();
+    } else if (description === '') {
+      setTextError('Escreva uma descrição!');
+      handleOpenError();
+    } else {
+      handleSave();
+    }
+  }
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -83,7 +146,6 @@ export function AppointmentCreate() {
     >
       <Background>
         <ScrollView>
-
           <Header
             title="Agendar Partida"
           />
@@ -125,6 +187,8 @@ export function AppointmentCreate() {
                   <SmallInput
                     maxLength={2}
                     onChangeText={setDay}
+                    onBlur={verifyDate}
+                    value={day}
                   />
                   <Text style={styles.divider}>
                     /
@@ -132,6 +196,8 @@ export function AppointmentCreate() {
                   <SmallInput
                     maxLength={2}
                     onChangeText={setMonth}
+                    onBlur={verifyDate}
+                    value={month}
                   />
                 </View>
               </View>
@@ -143,6 +209,8 @@ export function AppointmentCreate() {
                   <SmallInput
                     maxLength={2}
                     onChangeText={setHour}
+                    onBlur={verifyTime}
+                    value={hour}
                   />
                   <Text style={styles.divider}>
                     :
@@ -150,6 +218,8 @@ export function AppointmentCreate() {
                   <SmallInput
                     maxLength={2}
                     onChangeText={setMinute}
+                    onBlur={verifyTime}
+                    value={minute}
                   />
                 </View>
               </View>
@@ -172,13 +242,15 @@ export function AppointmentCreate() {
             <View style={styles.footer}>
               <Button
                 title="Agendar"
-                onPress={handleSave}
+                onPress={checkForm}
               />
             </View>
           </View>
-
         </ScrollView>
       </Background>
+      <ModalView visible={openErrorModal} styleVision={true} closeModal={handleCloseError}>
+        <Text style={styles.error}>{textError}</Text>
+      </ModalView>
       <ModalView visible={openGuildsModal} closeModal={handleCloseGuilds}>
         <Guilds handleGuildSelect={handleGuildSelect} />
       </ModalView>
