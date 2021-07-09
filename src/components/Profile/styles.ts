@@ -23,5 +23,46 @@ export const styles = StyleSheet.create({
   message: {
     fontFamily: theme.fonts.text400,
     color: theme.colors.highlight,
+  },
+  boxBottom: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10
+  },
+  title: {
+    fontFamily: theme.fonts.title700,
+    fontSize: 20,
+    color: theme.colors.heading,
+    textAlign: 'center',
+    paddingTop: 28,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  titleColor: {
+    color: theme.colors.primary,
+  },
+  btn: {
+    width: 180,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: 8
+  },
+  btnBody: {
+    fontFamily: theme.fonts.text500,
+    fontSize: 15,
+    flex: 1,
+    color: theme.colors.heading,
+    textAlign: 'center',
+    borderRadius: 8,
+    height: 56,
+    paddingTop: 16
+  },
+  cancel: {
+    borderWidth: 1,
+    borderColor: theme.colors.heading,
+  },
+  confirm: {
+    backgroundColor: theme.colors.primary,
   }
 });
