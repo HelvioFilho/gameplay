@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 10
+    justifyContent: 'center'
   },
   title: {
     fontFamily: theme.fonts.title700,
@@ -46,7 +46,8 @@ export const styles = StyleSheet.create({
     width: 180,
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: 8
+    paddingVertical: 20,
+    marginHorizontal: 4
   },
   btnBody: {
     fontFamily: theme.fonts.text500,

@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 250
+
   },
   modalView: {
     margin: 30,
@@ -32,5 +32,6 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     paddingHorizontal: 42,
     alignItems: "center",
+    height: "13%",
   },
 });
